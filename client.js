@@ -34,59 +34,72 @@
     const currentRole = roleEl ? roleEl.textContent : ''
     const currentName = nameEl ? nameEl.textContent : ''
     if (allowedRole && roleSlug(currentRole) !== roleSlug(allowedRole)) return
-    const controls = document.createElement('div')
-    controls.className = 'signature-controls'
     const area = box.querySelector('.signature-area') || box
-    const canvas = document.createElement('canvas')
-    canvas.style.display = 'none'
-    const rect = area.getBoundingClientRect()
-    const w = Math.max(300, Math.floor(rect.width || box.clientWidth || 300))
-    const h = Math.max(60, Math.floor(rect.height || 60))
-    canvas.width = w
-    canvas.height = h
-    canvas.className = 'signature-canvas'
-    const ctx = canvas.getContext('2d')
-    let drawing = false
-    let prev = null
-    function pos(e){ const r = canvas.getBoundingClientRect(); const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left; const y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top; return { x, y } }
-    function start(e){ drawing = true; prev = pos(e) }
-    function move(e){ if(!drawing) return; const p = pos(e); ctx.lineWidth=2; ctx.lineJoin='round'; ctx.lineCap='round'; ctx.strokeStyle='#111'; ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke(); prev = p }
-    function end(){ drawing = false }
-    canvas.addEventListener('mousedown', start)
-    canvas.addEventListener('mousemove', move)
-    canvas.addEventListener('mouseup', end)
-    canvas.addEventListener('mouseleave', end)
-    canvas.addEventListener('touchstart', start, { passive: true })
-    canvas.addEventListener('touchmove', move, { passive: true })
-    canvas.addEventListener('touchend', end)
-    const btnSign = document.createElement('button')
-    btnSign.textContent = 'Firmar'
-    const btnSave = document.createElement('button')
-    btnSave.textContent = 'Guardar'
-    const btnClear = document.createElement('button')
-    btnClear.textContent = 'Limpiar'
-    btnSave.disabled = true
-    btnClear.disabled = true
-    btnSign.addEventListener('click', ()=>{ controls.classList.add('active'); canvas.style.display = 'block'; canvas.focus(); btnSave.disabled = false; btnClear.disabled = false })
-    btnClear.addEventListener('click', ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height) })
-    btnSave.addEventListener('click', async ()=>{
-      const data = canvas.toDataURL('image/png')
-      const role = currentRole
-      const name = currentName
-      const r = await fetch(BACKEND + '/api/signature/' + (meta.slug || slug), { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ role, name, imageData: data }) })
-      const j = await r.json()
-      if (j && (j.fileUrl || j.path)){
-        const img = new Image()
-        img.className = 'signature-image'
-        img.src = j.fileUrl ? (BACKEND + j.fileUrl) : (BACKEND + j.path + '?t=' + Date.now())
-        img.onload = ()=>{ area.innerHTML = ''; area.appendChild(img); controls.remove(); checkAllSigned(meta) }
-      }
-    })
-    controls.appendChild(btnSign)
-    controls.appendChild(btnSave)
-    controls.appendChild(btnClear)
-    area.appendChild(canvas)
-    box.appendChild(controls)
+    const placeholder = document.createElement('div')
+    placeholder.className = 'signature-placeholder'
+    const who = [currentName, currentRole].filter(Boolean).join(' · ')
+    placeholder.textContent = who ? ('Toca para firmar: ' + who) : 'Toca aquí para firmar'
+    area.innerHTML = ''
+    area.appendChild(placeholder)
+
+    function openModal(){
+      const overlay = document.createElement('div')
+      overlay.className = 'signature-overlay signature-controls'
+      const modal = document.createElement('div')
+      modal.className = 'signature-modal'
+      const signer = document.createElement('div')
+      signer.className = 'signature-signer'
+      signer.textContent = who || 'Firma'
+      const canvas = document.createElement('canvas')
+      canvas.className = 'signature-canvas'
+      const vw = Math.min(window.innerWidth - 48, 680)
+      const vh = Math.max(180, Math.min(320, Math.floor(window.innerHeight * 0.35)))
+      canvas.width = Math.floor(vw)
+      canvas.height = Math.floor(vh)
+      const ctx = canvas.getContext('2d')
+      let drawing = false
+      let prev = null
+      function pos(e){ const r = canvas.getBoundingClientRect(); const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left; const y = (e.touches ? e.touches[0].clientY : e.clientY) - r.top; return { x, y } }
+      function start(e){ drawing = true; prev = pos(e) }
+      function move(e){ if(!drawing) return; const p = pos(e); ctx.lineWidth=2; ctx.lineJoin='round'; ctx.lineCap='round'; ctx.strokeStyle='#111'; ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke(); prev = p }
+      function end(){ drawing = false }
+      canvas.addEventListener('mousedown', start)
+      canvas.addEventListener('mousemove', move)
+      canvas.addEventListener('mouseup', end)
+      canvas.addEventListener('mouseleave', end)
+      canvas.addEventListener('touchstart', start, { passive: true })
+      canvas.addEventListener('touchmove', move, { passive: true })
+      canvas.addEventListener('touchend', end)
+      const actions = document.createElement('div')
+      actions.className = 'signature-actions'
+      const btnSave = document.createElement('button')
+      btnSave.textContent = 'Guardar'
+      const btnClear = document.createElement('button')
+      btnClear.textContent = 'Limpiar'
+      btnClear.addEventListener('click', ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height) })
+      btnSave.addEventListener('click', async ()=>{
+        const data = canvas.toDataURL('image/png')
+        const role = currentRole
+        const name = currentName
+        const r = await fetch(BACKEND + '/api/signature/' + (meta.slug || slug), { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ role, name, imageData: data }) })
+        const j = await r.json()
+        if (j && (j.fileUrl || j.path)){
+          const img = new Image()
+          img.className = 'signature-image'
+          img.src = j.fileUrl ? (BACKEND + j.fileUrl) : (BACKEND + j.path + '?t=' + Date.now())
+          img.onload = ()=>{ area.innerHTML = ''; area.appendChild(img); overlay.remove(); checkAllSigned(meta) }
+        }
+      })
+      actions.appendChild(btnSave)
+      actions.appendChild(btnClear)
+      modal.appendChild(signer)
+      modal.appendChild(canvas)
+      modal.appendChild(actions)
+      overlay.appendChild(modal)
+      overlay.addEventListener('click', (e)=>{ if (e.target === overlay) overlay.remove() })
+      document.body.appendChild(overlay)
+    }
+    placeholder.addEventListener('click', openModal)
   }
 
   async function hydrateTemplate(meta){
