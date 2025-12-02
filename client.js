@@ -140,6 +140,28 @@
     return await r.text()
   }
 
+  function injectHeadFromDoc(doc, meta){
+    const head = doc && doc.head ? doc.head : null
+    if (!head) return
+    all('head [data-template-style="1"]').forEach(n=>n.remove())
+    const basePath = '/templates/' + (meta.slugDir ? (meta.slugDir + '/') : '')
+    head.querySelectorAll('style, link[rel="stylesheet"]').forEach(el=>{
+      const clone = el.cloneNode(true)
+      clone.setAttribute('data-template-style','1')
+      const tag = (clone.tagName || '').toLowerCase()
+      if (tag === 'link'){
+        const href = clone.getAttribute('href') || ''
+        const isAbs = /^(https?:)?\/\//i.test(href) || href.startsWith('/')
+        if (!isAbs){
+          clone.setAttribute('href', basePath + href.replace(/^\.?\/+/, ''))
+        }
+      }
+      document.head.appendChild(clone)
+    })
+    const titleEl = head.querySelector('title')
+    if (titleEl) document.title = titleEl.textContent || document.title
+  }
+
   async function loadList(){
     const el = sel('#list')
     try {
@@ -163,8 +185,9 @@
     const html = await fetchTemplateHtml(slug)
     if (!html){ sel('#template-content').textContent = 'No encontrado'; return }
     const doc = new DOMParser().parseFromString(html, 'text/html')
-    const bodyHtml = (doc.body && doc.body.innerHTML) ? doc.body.innerHTML : html
     const meta = computeMeta(slug)
+    injectHeadFromDoc(doc, meta)
+    const bodyHtml = (doc.body && doc.body.innerHTML) ? doc.body.innerHTML : html
     sel('#template-content').innerHTML = bodyHtml
     await hydrateTemplate(meta)
   }
