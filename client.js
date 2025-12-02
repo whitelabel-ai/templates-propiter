@@ -36,9 +36,14 @@
     if (allowedRole && roleSlug(currentRole) !== roleSlug(allowedRole)) return
     const controls = document.createElement('div')
     controls.className = 'signature-controls'
+    const area = box.querySelector('.signature-area') || box
     const canvas = document.createElement('canvas')
-    canvas.width = Math.max(300, box.clientWidth)
-    canvas.height = 150
+    canvas.style.display = 'none'
+    const rect = area.getBoundingClientRect()
+    const w = Math.max(300, Math.floor(rect.width || box.clientWidth || 300))
+    const h = Math.max(60, Math.floor(rect.height || 60))
+    canvas.width = w
+    canvas.height = h
     canvas.className = 'signature-canvas'
     const ctx = canvas.getContext('2d')
     let drawing = false
@@ -62,7 +67,7 @@
     btnClear.textContent = 'Limpiar'
     btnSave.disabled = true
     btnClear.disabled = true
-    btnSign.addEventListener('click', ()=>{ controls.classList.add('active'); canvas.focus(); btnSave.disabled = false; btnClear.disabled = false })
+    btnSign.addEventListener('click', ()=>{ controls.classList.add('active'); canvas.style.display = 'block'; canvas.focus(); btnSave.disabled = false; btnClear.disabled = false })
     btnClear.addEventListener('click', ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height) })
     btnSave.addEventListener('click', async ()=>{
       const data = canvas.toDataURL('image/png')
@@ -74,28 +79,30 @@
         const img = new Image()
         img.className = 'signature-image'
         img.src = j.fileUrl ? (BACKEND + j.fileUrl) : (BACKEND + j.path + '?t=' + Date.now())
-        img.onload = ()=>{ box.insertBefore(img, box.firstChild); controls.remove(); checkAllSigned(meta) }
+        img.onload = ()=>{ area.innerHTML = ''; area.appendChild(img); controls.remove(); checkAllSigned(meta) }
       }
     })
     controls.appendChild(btnSign)
     controls.appendChild(btnSave)
     controls.appendChild(btnClear)
-    controls.appendChild(canvas)
+    area.appendChild(canvas)
     box.appendChild(controls)
   }
 
   async function hydrateTemplate(meta){
     const boxes = all('.signature-box')
     for (const box of boxes){
-      const existing = box.querySelector('img.signature-image')
-      if (existing) { box.insertBefore(existing, box.firstChild) }
+      const area = box.querySelector('.signature-area') || box
+      const existing = area.querySelector('img.signature-image') || box.querySelector('img.signature-image')
+      if (existing) { area.innerHTML = ''; area.appendChild(existing) }
     }
     for (const box of boxes){
       const roleEl = box.querySelector('.signature-role')
       const nameEl = box.querySelector('.signature-name')
       const currentRole = roleEl ? roleEl.textContent : ''
       const currentName = nameEl ? nameEl.textContent : ''
-      const already = box.querySelector('img.signature-image')
+      const area = box.querySelector('.signature-area') || box
+      const already = area.querySelector('img.signature-image')
       if (!already){
         try {
           const params = new URLSearchParams({ name: currentName, role: currentRole })
@@ -105,13 +112,15 @@
             const img = new Image()
             img.className = 'signature-image'
             img.src = BACKEND + j.fileUrl
-            box.insertBefore(img, box.firstChild)
+            area.innerHTML = ''
+            area.appendChild(img)
           }
         } catch(e) {}
       }
     }
     for (const box of boxes){
-      const hasImg = !!box.querySelector('img.signature-image')
+      const area = box.querySelector('.signature-area') || box
+      const hasImg = !!area.querySelector('img.signature-image')
       if (!hasImg) enableSignature(box, meta)
     }
     checkAllSigned(meta)

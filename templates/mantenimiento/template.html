@@ -247,37 +247,73 @@
       color: #456774;
     }
 
-    .signatures {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-      text-align: center;
-      font-size: 11px;
+   .signatures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+  margin-bottom: 24px; /* espacio antes de la evidencia */
+  text-align: center;
+  font-size: 11px;
+}
+
+.signature-box {
+  /* ya no padding-top raro ni border-top aquí */
+}
+
+.signature-area {
+  height: 60px; /* espacio reservado para firmar (con o sin imagen) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-image {
+  max-height: 40px;
+  max-width: 100%;
+  display: block;
+}
+
+.signature-line {
+  width: 100%;
+  border-top: 1px solid #cde3ee;
+  margin: 4px auto 6px; /* espacio entre área de firma, línea y texto */
+}
+
+.signature-name {
+  font-weight: 600;
+  color: #12323f;
+  margin-bottom: 2px;
+}
+
+.signature-role {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #4a7c8a;
+}
+
+    .photo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
     }
-    .signature-box {
-      padding-top: 50px;
-      border-top: 1px solid #cde3ee;
-      position: relative;
+    .photo-item {
+      flex: 1 1 30%;
+      max-width: 32%;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #cde3ee;
+      background: #f7fcff;
     }
-    .signature-name {
-      font-weight: 600;
-      color: #12323f;
-      margin-bottom: 2px;
+    .photo-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
-    .signature-role {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #4a7c8a;
-    }
-    .signature-image {
-      position: absolute;
-      left: 50%;
-      top: 8px;
-      transform: translateX(-50%);
-      max-height: 40px;
-    }
+
   </style>
 </head>
 <body>
@@ -290,7 +326,7 @@
           <!-- Si quieres logo, cambia esto por una imagen -->
           LOGO
           
-          <img src="" alt="Logo" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />
+          <img src="https://whitelabel.lat/assets/img/logo/logo-dark.png" alt="Logo" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />
         
         </div>
         <div class="company">
@@ -302,7 +338,7 @@
       </div>
       <div class="header-right">
         <div class="label">Fecha</div>
-        <div class="date-box">2025-12-01</div>
+        <div class="date-box">2025-12-02</div>
       </div>
     </div>
 
@@ -328,7 +364,7 @@
         </div>
       </div>
       <div style="font-size:11px;color:#4a7c8a;">
-        N° orden / consecutivo: <span style="font-weight:600;color:#12323f;">serv241</span>
+        N° orden / consecutivo: <span style="font-weight:600;color:#12323f;">serv242</span>
       </div>
     </div>
 
@@ -357,7 +393,7 @@
           </div>
           <div class="field">
             <div class="field-label">Correo electrónico</div>
-            <div class="field-value">null</div>
+            <div class="field-value"></div>
           </div>
           <div class="field">
             <div class="field-label">Contacto</div>
@@ -396,7 +432,7 @@
           </div>
           <div class="field">
             <div class="field-label">Placa / Activo</div>
-            <div class="field-value">null</div>
+            <div class="field-value"></div>
           </div>
         </div>
         <div class="fields-row">
@@ -431,11 +467,11 @@
               <span class="label">Revisión y ajuste de terminales eléctricos</span>
             </li>
             <li>
-              <span class="check">✓</span>
+              <span class="check">null</span>
               <span class="label">Revisión de aislamiento en tuberías</span>
             </li>
             <li>
-              <span class="check">null</span>
+              <span class="check">✓</span>
               <span class="label">Verificación de controles y termostato</span>
             </li>
           </ul>
@@ -451,7 +487,7 @@
               <span class="label">Inspección de ventiladores y rodamientos</span>
             </li>
             <li>
-              <span class="check">✓</span>
+              <span class="check">null</span>
               <span class="label">Revisión de posibles fugas de refrigerante</span>
             </li>
             <li>
@@ -478,14 +514,14 @@
         <div class="fields-row">
           <div class="field">
             <div class="field-label">Daño reportado por el cliente</div>
-            <div class="multiline">Reportaron que el equipo tenía una fuga de gas.</div>
+            <div class="multiline">El equipo no enfriaba correctamente (TEST)</div>
           </div>
         </div>
 
         <div class="fields-row" style="margin-top:8px;">
           <div class="field">
             <div class="field-label">Descripción del servicio realizado</div>
-            <div class="multiline">Se realizó revisión exhaustiva de componentes, válvulas y uniones. Se corrigió la fuga de gas y se verificó el funcionamiento general del equipo.</div>
+            <div class="multiline">Se realizó mantenimiento preventivo completo, limpieza de serpentines, revisión de presiones y amperaje (TEST).</div>
           </div>
         </div>
       </div>
@@ -507,47 +543,47 @@
             </td>
             <td>Amperaje compresor</td>
             <td class="value-cell">
-              <div class="value-inner">N/A</div>
+              <div class="value-inner">8.5 A</div>
             </td>
           </tr>
           <tr>
             <td>Tensión de alimentación</td>
             <td class="value-cell">
-              <div class="value-inner">220 V</div>
+              <div class="value-inner">220V</div>
             </td>
             <td>Amperaje unidad interior</td>
             <td class="value-cell">
-              <div class="value-inner">N/A</div>
+              <div class="value-inner">0.5 A</div>
             </td>
           </tr>
           <tr>
             <td>Presión de succión</td>
             <td class="value-cell">
-              <div class="value-inner">N/A</div>
+              <div class="value-inner">60 PSI</div>
             </td>
             <td>Amperaje unidad exterior</td>
             <td class="value-cell">
-              <div class="value-inner">N/A</div>
+              <div class="value-inner">9.0 A</div>
             </td>
           </tr>
           <tr>
             <td>Presión de descarga</td>
             <td class="value-cell">
-              <div class="value-inner">N/A</div>
+              <div class="value-inner">250 PSI</div>
             </td>
             <td>Temperatura ambiente</td>
             <td class="value-cell">
-              <div class="value-inner">30 grados C</div>
+              <div class="value-inner">28 C</div>
             </td>
           </tr>
           <tr>
             <td>Capacidad nominal (BTU / TR)</td>
             <td class="value-cell">
-              <div class="value-inner">9000 BTU</div>
+              <div class="value-inner">18000 BTU</div>
             </td>
             <td>Temperatura de suministro</td>
             <td class="value-cell">
-              <div class="value-inner">N/A</div>
+              <div class="value-inner">15 C</div>
             </td>
           </tr>
         </table>
@@ -558,30 +594,59 @@
     <div class="section">
       <div class="section-header">Observaciones y recomendaciones</div>
       <div class="section-body">
-        <div class="multiline">Se recomienda al cliente no esperar hasta que el equipo falle para solicitar el servicio y llamar al técnico ante cualquier anomalía cuanto antes para evitar daños mayores.</div>
+        <div class="multiline">Se recomienda reemplazar filtro de aire en el próximo servicio (TEST).</div>
       </div>
     </div>
 
-    <!-- FIRMAS -->
+
+   <!-- FIRMAS -->
 <div class="signatures">
   <div class="signature-box">
-    
-    <div class="signature-name">Diana Pinto</div>
+    <div class="signature-area">
+      
+    </div>
+    <div class="signature-line"></div>
+    <div class="signature-name">Maria Perez (Cliente Test)</div>
     <div class="signature-role">Firma cliente</div>
   </div>
 
   <div class="signature-box">
-    
+    <div class="signature-area">
+      
+    </div>
+    <div class="signature-line"></div>
     <div class="signature-name">Pedro Rodriguez</div>
     <div class="signature-role">Firma técnico</div>
   </div>
 
   <div class="signature-box">
-    <img class="signature-image" src="https://i.fonts2u.com/lu/luciana_4.png" alt="Firma gerente técnico" />
+    <div class="signature-area">
+      <img class="signature-image" src="https://i.fonts2u.com/lu/luciana_4.png" alt="Firma gerente técnico" />
+    </div>
+    <div class="signature-line"></div>
     <div class="signature-name">Luciana Mosquera Ayala</div>
     <div class="signature-role">Firma gerente técnico</div>
   </div>
 </div>
+
+
+
+
+    <!-- EVIDENCIA FOTOGRÁFICA -->
+    
+    <div class="section" style="margin-top:24px;">
+      <div class="section-header">Evidencia fotográfica</div>
+      <div class="section-body">
+        <div class="photo-grid">
+          <div class="photo-item">
+                      <img src="https://crm.whitelabel.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBb0lFIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--53213bd333b34a2cb4551edf8ee06e19187da608/File.jpg" alt="Evidencia 1" />
+                    </div><div class="photo-item">
+                      <img src="https://crm.whitelabel.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBb0lFIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--53213bd333b34a2cb4551edf8ee06e19187da608/File.jpg" alt="Evidencia 2" />
+                    </div>
+        </div>
+      </div>
+    </div>
+    
 
 
     <!-- PIE DE PÁGINA -->
