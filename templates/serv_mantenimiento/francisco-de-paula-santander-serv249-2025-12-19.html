@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <title>Formato de Mantenimiento Acondicionando S.A.S</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       padding: 20px;
@@ -14,6 +13,7 @@
       font-family: "Segoe UI", Arial, sans-serif;
       color: #12323f;
     }
+
     .page {
       max-width: 900px;
       margin: 0 auto;
@@ -23,101 +23,144 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       border-top: 8px solid #00a5c9;
     }
+
+    /* =========================
+       HEADER (MEJORADO)
+       ========================= */
+
     .doc-header {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       margin-bottom: 18px;
     }
+
     .logo-area {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 8px;
+      gap: 14px;
+      min-width: 0;
     }
+
     .logo-wrap {
+      width: 92px;
+      height: 92px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #f4fcff, #ffffff);
+      border: 1px solid #cde3ee;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4px 0;
-      width: 100%;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
     }
+
     .logo-img {
-      max-height: 88px;
-      max-width: 320px;
+      max-height: 70px;
+      max-width: 80px;
       width: auto;
       height: auto;
       object-fit: contain;
       display: block;
     }
+
     .company {
       line-height: 1.2;
-      text-align: center;
-      margin-top: 4px;
+      min-width: 0;
     }
+
     .company-name {
-      font-size: 20px;
-      font-weight: 800;
+      font-size: 18px;
+      font-weight: 900;
       letter-spacing: 0.08em;
       color: #007693;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
     .company-tagline {
+      margin-top: 4px;
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: #4a7c8a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .meta-row {
-      display: flex;
+
+    /* Cards de fecha y consecutivo integrados, modernos */
+    .meta-stack {
+      display: grid;
       gap: 8px;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      margin-top: 6px;
-      width: 100%;
+      justify-items: end;
     }
-    .meta-card {
-      background: #ffffff;
+
+    .meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
       border: 1px solid #cde3ee;
-      border-radius: 8px;
-      padding: 6px 10px;
-      min-width: 140px;
-      box-shadow: none;
-      text-align: right;
+      background: linear-gradient(180deg, #ffffff, #f6fcff);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+      min-width: 240px;
     }
+
+    .meta-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #9fd6e4;
+      background: linear-gradient(90deg, #00a5c9, #00c4e3);
+      color: #ffffff;
+      flex-shrink: 0;
+      font-weight: 900;
+      box-shadow: 0 10px 18px rgba(0, 165, 201, 0.22);
+    }
+
+    .meta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: left;
+      min-width: 0;
+      flex: 1;
+    }
+
     .meta-label {
       font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: #4a7c8a;
     }
+
     .meta-value {
-      margin-top: 2px;
-      font-size: 12px;
-      font-weight: 700;
+      font-size: 12.5px;
+      font-weight: 800;
       letter-spacing: 0.04em;
-      color: #007693;
-    }
-    .header-right .label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #4a7c8a;
-    }
-    .header-right .date-box,
-    .header-right .consec-box {
-      margin-top: 6px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #9fd6e4;
-      display: inline-block;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      background: #f5fcff;
-      font-size: 13px;
       color: #12323f;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    /* Línea separadora sutil bajo header */
+    .header-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,165,201,0), rgba(0,165,201,0.35), rgba(0,165,201,0));
+      margin: 14px 0 10px;
+    }
+
+    /* =========================
+       CHIPS
+       ========================= */
 
     .chip-row {
       display: flex;
@@ -127,37 +170,51 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+
     .chips {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
+
     .chip {
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      padding: 4px 10px;
+      padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid #9ad7e5;
       background: #f4fcff;
       color: #24606f;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-    }
-    .chip span.check {
-      min-width: 10px;
-      text-align: center;
-      font-weight: 700;
-      color: #007693;
+      gap: 6px;
     }
 
+    .chip span.check {
+      min-width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #007693;
+      background: #ffffff;
+      border: 1px solid #cde3ee;
+      padding: 0 4px;
+    }
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
     .section {
-  border-radius: 8px;
-  border: 1px solid #c5e0ec;
-  margin-bottom: 12px;
-  overflow: visible;
-}
+      border-radius: 8px;
+      border: 1px solid #c5e0ec;
+      margin-bottom: 12px;
+      overflow: visible;
+    }
 
     .section-header {
       background: linear-gradient(90deg, #00a5c9, #00c4e3);
@@ -168,6 +225,7 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
+
     .section-body {
       padding: 10px 12px 12px;
       font-size: 12px;
@@ -179,10 +237,12 @@
       margin-bottom: 6px;
       flex-wrap: wrap;
     }
+
     .field {
       flex: 1;
       min-width: 180px;
     }
+
     .field-label {
       font-size: 10px;
       font-weight: 700;
@@ -191,6 +251,7 @@
       color: #4a7c8a;
       margin-bottom: 1px;
     }
+
     .field-value {
       border-bottom: 1px solid #cde3ee;
       min-height: 18px;
@@ -213,6 +274,7 @@
       padding: 0;
       margin: 4px 0;
     }
+
     .checklist li {
       display: flex;
       align-items: flex-start;
@@ -220,6 +282,7 @@
       font-size: 11px;
       margin-bottom: 3px;
     }
+
     .checklist .check {
       width: 16px;
       height: 16px;
@@ -234,6 +297,7 @@
       background: #f5fcff;
       flex-shrink: 0;
     }
+
     .checklist .label {
       flex: 1;
       color: #23424f;
@@ -254,11 +318,13 @@
       border-collapse: collapse;
       font-size: 11px;
     }
+
     .conditions-table th,
     .conditions-table td {
       padding: 4px 6px;
       border-bottom: 1px solid #e0edf3;
     }
+
     .conditions-table th {
       text-align: left;
       text-transform: uppercase;
@@ -266,89 +332,93 @@
       font-size: 10px;
       color: #4a7c8a;
     }
+
     .conditions-table .value-cell {
       border-bottom: 1px solid #cde3ee;
       background: #f7fcff;
       border-radius: 3px;
       min-height: 18px;
     }
+
     .conditions-table .value-inner {
       padding: 2px 4px 3px;
     }
 
-.footer {
-  margin-top: 24px;
-  padding-top: 12px;
-  border-top: 1px solid #cde3ee;
-  font-size: 10px;
-  color: #456774;
-  text-align: center;
-  line-height: 1.5;
-}
+    /* =========================
+       FOOTER
+       ========================= */
 
-.footer-company {
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #007693;
-  font-size: 10px;
-  margin-bottom: 2px;
-}
+    .footer {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px solid #cde3ee;
+      font-size: 10px;
+      color: #456774;
+      text-align: center;
+      line-height: 1.5;
+    }
 
-.footer-address {
-  margin-bottom: 2px;
-}
+    .footer-company {
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #007693;
+      font-size: 10px;
+      margin-bottom: 2px;
+    }
 
-.footer-contact {
-  font-size: 9.5px;
-}
+    .footer-address { margin-bottom: 2px; }
+    .footer-contact { font-size: 9.5px; }
 
+    /* =========================
+       SIGNATURES
+       ========================= */
 
-   .signatures {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 18px;
-  margin-bottom: 24px; /* espacio antes de la evidencia */
-  text-align: center;
-  font-size: 11px;
-}
+    .signatures {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+      margin-bottom: 24px;
+      text-align: center;
+      font-size: 11px;
+    }
 
-.signature-box {
-  /* ya no padding-top raro ni border-top aquí */
-}
+    .signature-area {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.signature-area {
-  height: 60px; /* espacio reservado para firmar (con o sin imagen) */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .signature-image {
+      max-height: 40px;
+      max-width: 100%;
+      display: block;
+    }
 
-.signature-image {
-  max-height: 40px;
-  max-width: 100%;
-  display: block;
-}
+    .signature-line {
+      width: 100%;
+      border-top: 1px solid #cde3ee;
+      margin: 4px auto 6px;
+    }
 
-.signature-line {
-  width: 100%;
-  border-top: 1px solid #cde3ee;
-  margin: 4px auto 6px; /* espacio entre área de firma, línea y texto */
-}
+    .signature-name {
+      font-weight: 600;
+      color: #12323f;
+      margin-bottom: 2px;
+    }
 
-.signature-name {
-  font-weight: 600;
-  color: #12323f;
-  margin-bottom: 2px;
-}
+    .signature-role {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #4a7c8a;
+    }
 
-.signature-role {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #4a7c8a;
-}
+    /* =========================
+       PHOTOS
+       ========================= */
 
     .photo-grid {
       display: flex;
@@ -356,6 +426,7 @@
       gap: 8px;
       margin-top: 8px;
     }
+
     .photo-item {
       flex: 1 1 30%;
       max-width: 32%;
@@ -364,6 +435,7 @@
       border: 1px solid #cde3ee;
       background: #f7fcff;
     }
+
     .photo-item img {
       width: 100%;
       height: auto;
@@ -371,38 +443,51 @@
       object-fit: cover;
     }
 
-@media print {
-  .page {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
+    /* =========================
+       RESPONSIVE
+       ========================= */
 
-  .section,
-  .conditions-table,
-  .signatures,
-  .photo-grid {
-    break-inside: avoid;
-    page-break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-  }
+    @media (max-width: 700px) {
+      .doc-header {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+      .logo-area { justify-content: center; }
+      .meta-stack { justify-items: center; }
+      .meta-pill { min-width: 100%; }
+      .two-columns { grid-template-columns: 1fr; }
+      .signatures { grid-template-columns: 1fr; }
+      .photo-item { max-width: 100%; flex-basis: 100%; }
+    }
 
-  .section {
-    overflow: visible !important;
-  }
+    @media print {
+      .page {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
 
-  .conditions-table tr {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
+      .section,
+      .conditions-table,
+      .signatures,
+      .photo-grid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        -webkit-column-break-inside: avoid;
+      }
 
-  thead {
-    display: table-header-group;
-  }
-}
+      .section { overflow: visible !important; }
 
+      .conditions-table tr {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
 
+      thead { display: table-header-group; }
+    }
   </style>
 </head>
+
 <body>
   <div class="page">
 
@@ -412,23 +497,34 @@
         <div class="logo-wrap">
           <img class="logo-img" src="https://nocodb.whitelabel.lat/dltemp/9p15ao4ndBSYdb7q/1766187000000/noco/pt2jl7502mka8xd/mlcfquca4y18u0x/cp1lawix3mw7oo7/AcondicionandoLogo2_cyZPB.png" alt="Logo" />
         </div>
+
         <div class="company">
           <div class="company-name">ACONDICIONANDO S.A.S</div>
           <div class="company-tagline">CREAMOS EXPERIENCIAS MEMORABLES</div>
         </div>
       </div>
-      <div class="meta-row">
-        <div class="meta-card">
-          <div class="meta-label">Consecutivo</div>
-          <div class="meta-value">serv249</div>
+
+      <!-- FECHA + CONSECUTIVO (MODERNOS E INTEGRADOS) -->
+      <div class="meta-stack">
+        <div class="meta-pill">
+          <div class="meta-icon">#</div>
+          <div class="meta-text">
+            <div class="meta-label">Consecutivo</div>
+            <div class="meta-value">serv249</div>
+          </div>
         </div>
-        <div class="meta-card">
-          <div class="meta-label">Fecha</div>
-          <div class="meta-value">2025-12-19</div>
+
+        <div class="meta-pill">
+          <div class="meta-icon">📅</div>
+          <div class="meta-text">
+            <div class="meta-label">Fecha</div>
+            <div class="meta-value">2025-12-19</div>
+          </div>
         </div>
       </div>
     </div>
 
+    <div class="header-divider"></div>
 
     <!-- TIPO DE SERVICIO -->
     <div class="chip-row">
@@ -470,6 +566,7 @@
             <div class="field-value">kilómetro 5 vía la Caimanera Estación Central</div>
           </div>
         </div>
+
         <div class="fields-row">
           <div class="field">
             <div class="field-label">Teléfono</div>
@@ -505,6 +602,7 @@
             <div class="field-value">0.75</div>
           </div>
         </div>
+
         <div class="fields-row">
           <div class="field">
             <div class="field-label">Modelo</div>
@@ -519,6 +617,7 @@
             <div class="field-value"></div>
           </div>
         </div>
+
         <div class="fields-row">
           <div class="field">
             <div class="field-label">Ubicación física del equipo</div>
@@ -534,58 +633,22 @@
       <div class="section-body two-columns">
         <div>
           <ul class="checklist">
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Revisión y limpieza de filtros</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Limpieza de serpentines / evaporador</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Limpieza bandeja y línea de drenaje</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Revisión y ajuste de terminales eléctricos</span>
-            </li>
-            <li>
-              <span class="check"></span>
-              <span class="label">Revisión de aislamiento en tuberías</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Verificación de controles y termostato</span>
-            </li>
+            <li><span class="check">✓</span><span class="label">Revisión y limpieza de filtros</span></li>
+            <li><span class="check">✓</span><span class="label">Limpieza de serpentines / evaporador</span></li>
+            <li><span class="check">✓</span><span class="label">Limpieza bandeja y línea de drenaje</span></li>
+            <li><span class="check">✓</span><span class="label">Revisión y ajuste de terminales eléctricos</span></li>
+            <li><span class="check"></span><span class="label">Revisión de aislamiento en tuberías</span></li>
+            <li><span class="check">✓</span><span class="label">Verificación de controles y termostato</span></li>
           </ul>
         </div>
         <div>
           <ul class="checklist">
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Limpieza unidad condensadora</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Inspección de ventiladores y rodamientos</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Revisión de posibles fugas de refrigerante</span>
-            </li>
-            <li>
-              <span class="check"></span>
-              <span class="label">Verificación de presiones de operación</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Inspección de cableado y protecciones</span>
-            </li>
-            <li>
-              <span class="check">✓</span>
-              <span class="label">Otras actividades de mantenimiento</span>
-            </li>
+            <li><span class="check">✓</span><span class="label">Limpieza unidad condensadora</span></li>
+            <li><span class="check">✓</span><span class="label">Inspección de ventiladores y rodamientos</span></li>
+            <li><span class="check">✓</span><span class="label">Revisión de posibles fugas de refrigerante</span></li>
+            <li><span class="check"></span><span class="label">Verificación de presiones de operación</span></li>
+            <li><span class="check">✓</span><span class="label">Inspección de cableado y protecciones</span></li>
+            <li><span class="check">✓</span><span class="label">Otras actividades de mantenimiento</span></li>
           </ul>
         </div>
       </div>
@@ -622,49 +685,31 @@
           </tr>
           <tr>
             <td>Refrigerante</td>
-            <td class="value-cell">
-              <div class="value-inner">R410</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">R410</div></td>
             <td>Amperaje compresor</td>
-            <td class="value-cell">
-              <div class="value-inner">N/A</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">N/A</div></td>
           </tr>
           <tr>
             <td>Tensión de alimentación</td>
-            <td class="value-cell">
-              <div class="value-inner">N/A</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">N/A</div></td>
             <td>Amperaje unidad interior</td>
-            <td class="value-cell">
-              <div class="value-inner">N/A</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">N/A</div></td>
           </tr>
           <tr>
             <td>Presión de succión</td>
-            <td class="value-cell">
-              <div class="value-inner">N/A</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">N/A</div></td>
             <td>Amperaje unidad exterior</td>
-            <td class="value-cell">
-              <div class="value-inner">N/A</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">N/A</div></td>
           </tr>
           <tr>
             <td>Presión de descarga</td>
-            <td class="value-cell">
-              <div class="value-inner">N/A</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">N/A</div></td>
             <td>Temperatura ambiente</td>
-            <td class="value-cell">
-              <div class="value-inner">34°C</div>
-            </td>
+            <td class="value-cell"><div class="value-inner">34°C</div></td>
           </tr>
           <tr>
             <td colspan="2">Temperatura de suministro</td>
-            <td class="value-cell" colspan="2">
-              <div class="value-inner">24°C</div>
-            </td>
+            <td class="value-cell" colspan="2"><div class="value-inner">24°C</div></td>
           </tr>
         </table>
       </div>
@@ -678,39 +723,35 @@
       </div>
     </div>
 
+    <!-- FIRMAS -->
+    <div class="signatures">
+      <div class="signature-box">
+        <div class="signature-area">
+          
+        </div>
+        <div class="signature-line"></div>
+        <div class="signature-name">Gilberto Arciniegas</div>
+        <div class="signature-role">Firma cliente</div>
+      </div>
 
-   <!-- FIRMAS -->
-<div class="signatures">
-  <div class="signature-box">
-    <div class="signature-area">
-      
+      <div class="signature-box">
+        <div class="signature-area">
+          
+        </div>
+        <div class="signature-line"></div>
+        <div class="signature-name">Cristian Camilo Palma Camargo</div>
+        <div class="signature-role">Firma técnico</div>
+      </div>
+
+      <div class="signature-box">
+        <div class="signature-area">
+          <img class="signature-image" src="https://i.fonts2u.com/lu/luciana_4.png" alt="Firma gerente técnico" />
+        </div>
+        <div class="signature-line"></div>
+        <div class="signature-name">Luciana Mosquera Ayala</div>
+        <div class="signature-role">Firma gerente técnico</div>
+      </div>
     </div>
-    <div class="signature-line"></div>
-    <div class="signature-name">Gilberto Arciniegas</div>
-    <div class="signature-role">Firma cliente</div>
-  </div>
-
-  <div class="signature-box">
-    <div class="signature-area">
-      
-    </div>
-    <div class="signature-line"></div>
-    <div class="signature-name">Cristian Camilo Palma Camargo</div>
-    <div class="signature-role">Firma técnico</div>
-  </div>
-
-  <div class="signature-box">
-    <div class="signature-area">
-      <img class="signature-image" src="https://i.fonts2u.com/lu/luciana_4.png" alt="Firma gerente técnico" />
-    </div>
-    <div class="signature-line"></div>
-    <div class="signature-name">Luciana Mosquera Ayala</div>
-    <div class="signature-role">Firma gerente técnico</div>
-  </div>
-</div>
-
-
-
 
     <!-- EVIDENCIA FOTOGRÁFICA -->
     
@@ -725,7 +766,6 @@
       </div>
     </div>
     
-
 
     <!-- PIE DE PÁGINA -->
     <div class="footer">
