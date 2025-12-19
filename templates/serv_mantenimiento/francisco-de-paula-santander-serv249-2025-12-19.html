@@ -25,41 +25,37 @@
     }
 
     /* =========================
-       HEADER (MEJORADO)
+       HEADER (LOGO CENTRADO + META INTEGRADA)
        ========================= */
 
     .doc-header {
-      display: grid;
-      grid-template-columns: 1fr auto;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 14px;
-      min-width: 0;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
     }
 
     .logo-wrap {
-      width: 92px;
-      height: 92px;
-      border-radius: 16px;
-      background: linear-gradient(145deg, #f4fcff, #ffffff);
-      border: 1px solid #cde3ee;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+      padding: 6px 0;
+      width: 100%;
     }
 
     .logo-img {
-      max-height: 70px;
-      max-width: 80px;
+      max-height: 92px; /* grande */
+      max-width: 340px; /* grande */
       width: auto;
       height: auto;
       object-fit: contain;
@@ -68,35 +64,32 @@
 
     .company {
       line-height: 1.2;
-      min-width: 0;
+      text-align: center;
+      margin-top: 4px;
     }
 
     .company-name {
-      font-size: 18px;
-      font-weight: 900;
+      font-size: 20px;
+      font-weight: 800;
       letter-spacing: 0.08em;
       color: #007693;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .company-tagline {
-      margin-top: 4px;
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: #4a7c8a;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    /* Cards de fecha y consecutivo integrados, modernos */
-    .meta-stack {
-      display: grid;
-      gap: 8px;
-      justify-items: end;
+    /* Meta cards modernizadas y "pegadas" al diseño (no aparte) */
+    .meta-row {
+      width: 100%;
+      display: flex;
+      justify-content: center; /* centradas debajo del logo */
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
     }
 
     .meta-pill {
@@ -108,7 +101,7 @@
       border: 1px solid #cde3ee;
       background: linear-gradient(180deg, #ffffff, #f6fcff);
       box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
-      min-width: 240px;
+      min-width: 260px;
     }
 
     .meta-icon {
@@ -151,11 +144,11 @@
       text-overflow: ellipsis;
     }
 
-    /* Línea separadora sutil bajo header */
     .header-divider {
+      width: 100%;
       height: 1px;
       background: linear-gradient(90deg, rgba(0,165,201,0), rgba(0,165,201,0.35), rgba(0,165,201,0));
-      margin: 14px 0 10px;
+      margin: 14px 0 8px;
     }
 
     /* =========================
@@ -448,13 +441,6 @@
        ========================= */
 
     @media (max-width: 700px) {
-      .doc-header {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
-      }
-      .logo-area { justify-content: center; }
-      .meta-stack { justify-items: center; }
       .meta-pill { min-width: 100%; }
       .two-columns { grid-template-columns: 1fr; }
       .signatures { grid-template-columns: 1fr; }
@@ -462,27 +448,14 @@
     }
 
     @media print {
-      .page {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
-      .section,
-      .conditions-table,
-      .signatures,
-      .photo-grid {
+      .page { break-inside: avoid; page-break-inside: avoid; }
+      .section, .conditions-table, .signatures, .photo-grid {
         break-inside: avoid;
         page-break-inside: avoid;
         -webkit-column-break-inside: avoid;
       }
-
       .section { overflow: visible !important; }
-
-      .conditions-table tr {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-
+      .conditions-table tr { break-inside: avoid; page-break-inside: avoid; }
       thead { display: table-header-group; }
     }
   </style>
@@ -497,15 +470,14 @@
         <div class="logo-wrap">
           <img class="logo-img" src="https://nocodb.whitelabel.lat/dltemp/9p15ao4ndBSYdb7q/1766187000000/noco/pt2jl7502mka8xd/mlcfquca4y18u0x/cp1lawix3mw7oo7/AcondicionandoLogo2_cyZPB.png" alt="Logo" />
         </div>
-
         <div class="company">
           <div class="company-name">ACONDICIONANDO S.A.S</div>
           <div class="company-tagline">CREAMOS EXPERIENCIAS MEMORABLES</div>
         </div>
       </div>
 
-      <!-- FECHA + CONSECUTIVO (MODERNOS E INTEGRADOS) -->
-      <div class="meta-stack">
+      <!-- FECHA + CONSECUTIVO (CENTRADOS, MODERNOS, INTEGRADOS) -->
+      <div class="meta-row">
         <div class="meta-pill">
           <div class="meta-icon">#</div>
           <div class="meta-text">
@@ -522,29 +494,17 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="header-divider"></div>
+      <div class="header-divider"></div>
+    </div>
 
     <!-- TIPO DE SERVICIO -->
     <div class="chip-row">
       <div class="chips">
-        <div class="chip">
-          <span class="check">✓</span>
-          <span>Mantenimiento</span>
-        </div>
-        <div class="chip">
-          <span class="check"></span>
-          <span>Llamada por servicio</span>
-        </div>
-        <div class="chip">
-          <span class="check"></span>
-          <span>Reparación</span>
-        </div>
-        <div class="chip">
-          <span class="check"></span>
-          <span>Instalación</span>
-        </div>
+        <div class="chip"><span class="check">✓</span><span>Mantenimiento</span></div>
+        <div class="chip"><span class="check"></span><span>Llamada por servicio</span></div>
+        <div class="chip"><span class="check"></span><span>Reparación</span></div>
+        <div class="chip"><span class="check"></span><span>Instalación</span></div>
       </div>
     </div>
 
@@ -553,33 +513,14 @@
       <div class="section-header">Datos del cliente</div>
       <div class="section-body">
         <div class="fields-row">
-          <div class="field">
-            <div class="field-label">Cliente</div>
-            <div class="field-value">Francisco de Paula Santander</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Sucursal</div>
-            <div class="field-value">Finca La Poderosa</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Ubicación</div>
-            <div class="field-value">kilómetro 5 vía la Caimanera Estación Central</div>
-          </div>
+          <div class="field"><div class="field-label">Cliente</div><div class="field-value">Francisco de Paula Santander</div></div>
+          <div class="field"><div class="field-label">Sucursal</div><div class="field-value">Finca La Poderosa</div></div>
+          <div class="field"><div class="field-label">Ubicación</div><div class="field-value">kilómetro 5 vía la Caimanera Estación Central</div></div>
         </div>
-
         <div class="fields-row">
-          <div class="field">
-            <div class="field-label">Teléfono</div>
-            <div class="field-value">3144152928</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Correo electrónico</div>
-            <div class="field-value"></div>
-          </div>
-          <div class="field">
-            <div class="field-label">Contacto</div>
-            <div class="field-value">Felipe Moreno</div>
-          </div>
+          <div class="field"><div class="field-label">Teléfono</div><div class="field-value">3144152928</div></div>
+          <div class="field"><div class="field-label">Correo electrónico</div><div class="field-value"></div></div>
+          <div class="field"><div class="field-label">Contacto</div><div class="field-value">Felipe Moreno</div></div>
         </div>
       </div>
     </div>
@@ -589,40 +530,17 @@
       <div class="section-header">Descripción de los equipos</div>
       <div class="section-body">
         <div class="fields-row">
-          <div class="field">
-            <div class="field-label">Tipo de equipo</div>
-            <div class="field-value">PAQUETE</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Marca</div>
-            <div class="field-value">OLIMPO</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Capacidad</div>
-            <div class="field-value">0.75</div>
-          </div>
+          <div class="field"><div class="field-label">Tipo de equipo</div><div class="field-value">PAQUETE</div></div>
+          <div class="field"><div class="field-label">Marca</div><div class="field-value">OLIMPO</div></div>
+          <div class="field"><div class="field-label">Capacidad</div><div class="field-value">0.75</div></div>
         </div>
-
         <div class="fields-row">
-          <div class="field">
-            <div class="field-label">Modelo</div>
-            <div class="field-value">45887HYG</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Serial</div>
-            <div class="field-value">1236547895KL</div>
-          </div>
-          <div class="field">
-            <div class="field-label">Placa / Activo</div>
-            <div class="field-value"></div>
-          </div>
+          <div class="field"><div class="field-label">Modelo</div><div class="field-value">45887HYG</div></div>
+          <div class="field"><div class="field-label">Serial</div><div class="field-value">1236547895KL</div></div>
+          <div class="field"><div class="field-label">Placa / Activo</div><div class="field-value"></div></div>
         </div>
-
         <div class="fields-row">
-          <div class="field">
-            <div class="field-label">Ubicación física del equipo</div>
-            <div class="field-value">Despacho principal</div>
-          </div>
+          <div class="field"><div class="field-label">Ubicación física del equipo</div><div class="field-value">Despacho principal</div></div>
         </div>
       </div>
     </div>
@@ -664,7 +582,6 @@
             <div class="multiline">Ninguno</div>
           </div>
         </div>
-
         <div class="fields-row" style="margin-top:8px;">
           <div class="field">
             <div class="field-label">Descripción del servicio realizado</div>
@@ -770,12 +687,8 @@
     <!-- PIE DE PÁGINA -->
     <div class="footer">
       <div class="footer-company">ACONDICIONANDO S.A.S</div>
-      <div class="footer-address">
-        Parque Industrial Manzana 11 Casa 12 · Sector D · Pereira
-      </div>
-      <div class="footer-contact">
-        Correo: acondicionandosas@gmail.com · Tel: 316 610 9591 – 317 680 1633
-      </div>
+      <div class="footer-address">Parque Industrial Manzana 11 Casa 12 · Sector D · Pereira</div>
+      <div class="footer-contact">Correo: acondicionandosas@gmail.com · Tel: 316 610 9591 – 317 680 1633</div>
     </div>
 
   </div>
