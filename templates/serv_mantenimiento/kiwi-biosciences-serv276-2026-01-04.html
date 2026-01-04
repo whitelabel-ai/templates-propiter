@@ -450,71 +450,76 @@
     }
 
     /* =========================
-       EVIDENCE TABLE (HEADER REPETIBLE)
-       ========================= */
+   EVIDENCE TABLE (HEADER REPETIBLE)
+   ========================= */
 
-    .section.evidence{
-      border: none !important;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
+.section.evidence{
+  border: 1px solid #c5e0ec;      /* el borde vive aquí (NO en la tabla) */
+  border-radius: 8px;
+  overflow: visible !important;
 
-    .evidence-table{
-      width: 100%;
-      table-layout: fixed;
-      border-collapse: separate;
-      border-spacing: 0;
-      border: 1px solid #c5e0ec;
-      border-radius: 8px;
-      overflow: hidden;
-    }
+  /* ✅ clave: si se parte entre páginas, “clona” la caja y CIERRA el borde en cada página */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 
-    .evidence-table thead th{
-      background: linear-gradient(90deg, #00a5c9, #00c4e3);
-      color: #ffffff;
-      padding: 6px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      text-align: left;
-    }
-    /* opcional: para que el header respete el radio arriba */
-    .evidence-table thead th:first-child{
-      border-top-left-radius: 8px;
-    }
-    .evidence-table thead th:last-child{
-      border-top-right-radius: 8px;
-    }
+/* la tabla SOLO organiza, SIN borde (para que no se estire vertical al partir) */
+.evidence-table{
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
 
+  border: 0 !important;           /* ✅ evita las líneas largas hasta el footer */
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
 
-    .evidence-table tbody td{
-      padding: 4px;
-      vertical-align: top;
-    }
-    .evidence-table tbody tr:first-child td{
-      padding-top: 10px;
-    }
-    .evidence-table tbody tr:last-child td{
-      padding-bottom: 12px;
-    }
-    .evidence-table tbody td:first-child{
-      padding-left: 12px;
-    }
-    .evidence-table tbody td:last-child{
-      padding-right: 12px;
-    }
+/* header repetible */
+.evidence-table thead th{
+  background: linear-gradient(90deg, #00a5c9, #00c4e3);
+  color: #ffffff;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: left;
 
-    .evidence-table tr,
-    .evidence-table td{
-      break-inside: avoid;
-      page-break-inside: avoid;
-    }
+  /* que el header respete el radio del contenedor */
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
 
-    .photo-empty{
-      border: 1px dashed #cde3ee;
-      background: #fbfdff;
-    }
+.evidence-table tbody td{
+  padding: 4px;
+  vertical-align: top;
+}
+.evidence-table tbody tr:first-child td{
+  padding-top: 10px;
+}
+.evidence-table tbody tr:last-child td{
+  padding-bottom: 12px;
+}
+.evidence-table tbody td:first-child{
+  padding-left: 12px;
+}
+.evidence-table tbody td:last-child{
+  padding-right: 12px;
+}
+
+/* no partir una fila / celda de fotos a la mitad */
+.evidence-table tr,
+.evidence-table td{
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.photo-empty{
+  border: 1px dashed #cde3ee;
+  background: #fbfdff;
+}
+
 
     /* =========================
        RESPONSIVE
