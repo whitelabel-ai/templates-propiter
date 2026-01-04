@@ -478,13 +478,12 @@
 
     :root{
       /* Alto realista del footer (divisor + 3 líneas). Ajusta si hace falta */
-      --footer-h: 10mm;
+      --footer-h: 15mm;
     }
 
     @page{
       size: A4;
-      /* 5mm en todos lados, abajo: 5mm + footer + 5mm */
-      margin: 5mm 5mm calc(5mm + var(--footer-h) + 5mm) 5mm;
+      margin: 5mm; /* ✅ 5mm en TODO lado */
     }
 
     @media print {
@@ -503,6 +502,11 @@
 
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+      }
+
+      /* ✅ esto evita que el footer se monte con contenido */
+      .page{
+        padding-bottom: calc(var(--footer-h) + 5mm) !important; /* 5mm arriba del footer */
       }
 
       /* BLOQUES: evitamos cortes feos, PERO dejamos evidencia partir */
@@ -534,18 +538,24 @@
 
       thead{ display: table-header-group; }
 
-      /* Firmas: nunca partir */
+        /* ✅ intenta “pegar” firmas con lo anterior */
       .signatures{
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
+        break-before: avoid-page !important;
+        page-break-before: avoid !important;
+      }
+
+      /* ✅ evita que el navegador “corte” justo después de evidencia */
+      .section.evidence{
+        break-after: avoid-page !important;
+        page-break-after: avoid !important;
       }
 
       /* FOOTER repetido, dentro del margen reservado */
       .footer{
         position: fixed;
-        left: 5mm;
-        right: 5mm;
-        bottom: 5mm;
+        left: 5mm !important;
+        right: 5mm !important;
+        bottom: 5mm !important;
         background: #ffffff;
         border-top: none !important; /* solo divisor */
         padding-top: 6px;
