@@ -485,13 +485,13 @@
 
 /* altura estimada del footer (ajústala si tu footer crece) */
 :root{
-  --footer-h: 18mm; /* footer + separación interna */
+  --footer-h: 15mm; /* footer + separación interna */
 }
 
 @page{
   size: A4;
   /* 5mm en todos lados, pero abajo: 5mm + footer + 5mm */
-  margin: 5mm 5mm calc(5mm + var(--footer-h) + 5mm) 5mm;
+  margin: 5mm 5mm 20mm 5mm;
 }
 
 @media print {
@@ -829,6 +829,10 @@
 
 </div>
 
+
+
+  </div>
+
 <!-- DIVISOR -->
 <div class="header-divider"></div>
 
@@ -838,8 +842,6 @@
       <div class="footer-address">Parque Industrial Manzana 11 Casa 12 · Sector D · Pereira</div>
       <div class="footer-contact">Correo: acondicionandosas@gmail.com · Tel: 316 610 9591 – 317 680 1633</div>
     </div>
-
-  </div>
 
 </body>
 </html>
