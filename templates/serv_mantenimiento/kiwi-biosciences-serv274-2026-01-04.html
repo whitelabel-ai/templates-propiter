@@ -510,7 +510,7 @@
       }
 
       /* BLOQUES: evitamos cortes feos, PERO dejamos evidencia partir */
-      .section,
+      .section:not(.evidence),
       .conditions-table{
         break-inside: avoid;
         page-break-inside: avoid;
@@ -776,7 +776,7 @@
 
     <!-- EVIDENCIA FOTOGRÁFICA (PARTIBLE) -->
     
-    <div class="section" style="margin-top:24px;">
+    <div class="section evidence" style="margin-top:24px;">
       <div class="section-header">Evidencia fotográfica</div>
       <div class="section-body">
         <div class="photo-grid">
