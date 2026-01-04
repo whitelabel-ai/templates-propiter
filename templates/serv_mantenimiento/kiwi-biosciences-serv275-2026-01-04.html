@@ -360,7 +360,7 @@
     }
 
     .footer .header-divider{
-      margin: 0 0 6px !important; /* compactito en footer */
+      margin: 0 0 6px !important;
     }
 
     .footer-company {
@@ -387,8 +387,6 @@
       margin-bottom: 24px;
       text-align: center;
       font-size: 11px;
-
-      /* clave: nunca partir firmas */
       break-inside: avoid;
       page-break-inside: avoid;
     }
@@ -427,15 +425,8 @@
     }
 
     /* =========================
-       PHOTOS (NORMAL)
+       PHOTOS (UNIFORME)
        ========================= */
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 8px;
-    }
 
     .photo-item {
       width: 100%;
@@ -447,8 +438,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-
-      /* evita cortar una foto a la mitad */
       break-inside: avoid;
       page-break-inside: avoid;
     }
@@ -458,6 +447,60 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    /* =========================
+       EVIDENCE TABLE (HEADER REPETIBLE)
+       ========================= */
+
+    .section.evidence{
+      overflow: hidden;
+    }
+
+    .evidence-table{
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .evidence-table thead th{
+      background: linear-gradient(90deg, #00a5c9, #00c4e3);
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: left;
+    }
+
+    .evidence-table tbody td{
+      padding: 4px;
+      vertical-align: top;
+    }
+    .evidence-table tbody tr:first-child td{
+      padding-top: 10px;
+    }
+    .evidence-table tbody tr:last-child td{
+      padding-bottom: 12px;
+    }
+    .evidence-table tbody td:first-child{
+      padding-left: 12px;
+    }
+    .evidence-table tbody td:last-child{
+      padding-right: 12px;
+    }
+
+    .evidence-table tr,
+    .evidence-table td{
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .photo-empty{
+      border: 1px dashed #cde3ee;
+      background: #fbfdff;
     }
 
     /* =========================
@@ -477,13 +520,12 @@
        ========================= */
 
     :root{
-      /* Alto realista del footer (divisor + 3 líneas). Ajusta si hace falta */
       --footer-h: 15mm;
     }
 
     @page{
       size: A4;
-      margin: 5mm; /* ✅ 5mm en TODO lado */
+      margin: 5mm;
     }
 
     @media print {
@@ -499,65 +541,39 @@
         box-shadow: none !important;
         border-radius: 0 !important;
         padding: 0 !important;
-
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      /* ✅ esto evita que el footer se monte con contenido */
+      /* reserva espacio para footer + 5mm arriba */
       .page{
-        padding-bottom: calc(var(--footer-h) + 5mm) !important; /* 5mm arriba del footer */
+        padding-bottom: calc(var(--footer-h) + 5mm) !important;
       }
 
-      /* BLOQUES: evitamos cortes feos, PERO dejamos evidencia partir */
+      /* Bloques no-evidencia: evita cortes feos */
       .section:not(.evidence),
       .conditions-table{
         break-inside: avoid;
         page-break-inside: avoid;
       }
 
-      /* ✅ Evidencia se puede partir (NO bloquear el grid completo) */
-      .photo-grid{
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-
-        /* para impresión: más estable partir con flex */
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-      }
-
-      .photo-item{
-        /* 3 por fila, simétrico y más estable al paginar */
-        width: calc((100% - 16px) / 3) !important;
-        flex: 0 0 calc((100% - 16px) / 3) !important;
-
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
-      }
-
+      /* Repetir header de evidencia como tabla */
       thead{ display: table-header-group; }
 
-        /* ✅ intenta “pegar” firmas con lo anterior */
+      /* Firmas: intenta pegarlas a lo anterior */
       .signatures{
         break-before: avoid-page !important;
         page-break-before: avoid !important;
       }
 
-      /* ✅ evita que el navegador “corte” justo después de evidencia */
-      .section.evidence{
-        break-after: avoid-page !important;
-        page-break-after: avoid !important;
-      }
-
-      /* FOOTER repetido, dentro del margen reservado */
+      /* Footer dentro del margen */
       .footer{
         position: fixed;
         left: 5mm !important;
         right: 5mm !important;
         bottom: 5mm !important;
         background: #ffffff;
-        border-top: none !important; /* solo divisor */
+        border-top: none !important;
         padding-top: 6px;
       }
 
@@ -774,39 +790,83 @@
       </div>
     </div>
 
-    <!-- EVIDENCIA FOTOGRÁFICA (PARTIBLE) -->
+    <!-- EVIDENCIA FOTOGRÁFICA (CON HEADER REPETIBLE) -->
     
     <div class="section evidence" style="margin-top:24px;">
-      <div class="section-header">Evidencia fotográfica</div>
-      <div class="section-body">
-        <div class="photo-grid">
-          <div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 1" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 2" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 3" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 4" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 5" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 6" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 7" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 8" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 9" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 10" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 11" />
-                    </div><div class="photo-item">
-                      <img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 12" />
-                    </div>
-        </div>
-      </div>
+      <table class="evidence-table">
+        <thead>
+          <tr>
+            <th colspan="3">Evidencia fotográfica</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+                  <tr>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 1" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 2" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 3" /></div>
+                      </td>
+                    
+                  </tr>
+                
+                  <tr>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 4" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 5" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 6" /></div>
+                      </td>
+                    
+                  </tr>
+                
+                  <tr>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 7" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 8" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 9" /></div>
+                      </td>
+                    
+                  </tr>
+                
+                  <tr>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdGtHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--044a890699592ec6e6ccdeca7c03a31175e875be/File.jpg" alt="Evidencia 10" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdG9HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--281fb181353eb6f89f782292eaff6923e67e492d/File.jpg" alt="Evidencia 11" /></div>
+                      </td>
+                    
+                      <td>
+                        <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdHNHIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f86beb1b1fa2d5a2294539663a6b68dcc7493d29/File.jpg" alt="Evidencia 12" /></div>
+                      </td>
+                    
+                  </tr>
+                
+        </tbody>
+      </table>
     </div>
     
 
