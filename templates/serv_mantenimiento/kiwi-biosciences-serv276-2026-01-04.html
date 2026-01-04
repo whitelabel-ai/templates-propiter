@@ -454,7 +454,9 @@
        ========================= */
 
     .section.evidence{
+      border: none !important;
       overflow: hidden;
+      margin-bottom: 12px;
     }
 
     .evidence-table{
@@ -462,6 +464,9 @@
       table-layout: fixed;
       border-collapse: separate;
       border-spacing: 0;
+      border: 1px solid #c5e0ec;
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     .evidence-table thead th{
@@ -474,6 +479,14 @@
       letter-spacing: 0.12em;
       text-align: left;
     }
+    /* opcional: para que el header respete el radio arriba */
+    .evidence-table thead th:first-child{
+      border-top-left-radius: 8px;
+    }
+    .evidence-table thead th:last-child{
+      border-top-right-radius: 8px;
+    }
+
 
     .evidence-table tbody td{
       padding: 4px;
