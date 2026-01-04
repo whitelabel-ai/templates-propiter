@@ -480,74 +480,69 @@
     }
 
     /* =========================
-       PRINT / PDF (FIX PAGINACIÓN)
-       ========================= */
-    @page {
-    margin: 5mm 5mm 10mm 5mm; /* ⬅️ más espacio abajo */
-    size: A4;
-    }
+   PRINT / PDF
+   ========================= */
 
-    @media print {
-  body {
+/* altura estimada del footer (ajústala si tu footer crece) */
+:root{
+  --footer-h: 18mm; /* footer + separación interna */
+}
+
+@page{
+  size: A4;
+  /* 5mm en todos lados, pero abajo: 5mm + footer + 5mm */
+  margin: 5mm 5mm calc(5mm + var(--footer-h) + 5mm) 5mm;
+}
+
+@media print {
+  body{
     background: #ffffff !important;
-    padding: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* Reservar espacio para footer */
-  @page {
-    size: A4;
-    margin: 8mm 8mm 10mm 8mm; /* ⬅️ espacio inferior */
-  }
-
-  .page {
+  .page{
     max-width: 100% !important;
     margin: 0 !important;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
     box-shadow: none !important;
     border-radius: 0 !important;
-    border-top: 8px solid #00a5c9;
-    padding-bottom: 10mm !important; /* ⬅️ evita que el footer tape contenido */
+
+    /* Importante: no uses padding gigante aquí; deja que @page haga el margen */
+    padding: 0 !important;
+
+    /* evita recortes raros de fondos/bordes */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
-  .page {
-    break-inside: auto !important;
-    page-break-inside: auto !important;
-  }
-
+  /* Evitar que bloques se partan feo */
   .section,
   .conditions-table,
   .signatures,
-  .photo-grid {
+  .photo-grid{
     break-inside: avoid;
     page-break-inside: avoid;
     -webkit-column-break-inside: avoid;
   }
 
-  .conditions-table tr {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
+  thead{ display: table-header-group; }
 
-  thead {
-    display: table-header-group;
-  }
-
-  /* FOOTER FIJO EN TODAS LAS PÁGINAS */
-  .footer {
+  /* FOOTER repetido en cada página, dentro del área reservada por @page */
+  .footer{
     position: fixed;
+    left: 5mm;
+    right: 5mm;
     bottom: 5mm;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: #ffffff;
+
+    /* no uses width:100% porque se sale del margen */
     border-top: 1px solid #cde3ee;
     padding-top: 6px;
     font-size: 9.5px;
     text-align: center;
+    background: #ffffff;
   }
 }
+
 
   </style>
 </head>
@@ -833,10 +828,11 @@
   </div>
 
 </div>
+   
 
+  </div>
 <!-- DIVISOR -->
 <div class="header-divider"></div>
-   
 
     <!-- PIE DE PÁGINA -->
     <div class="footer">
@@ -845,6 +841,5 @@
       <div class="footer-contact">Correo: acondicionandosas@gmail.com · Tel: 316 610 9591 – 317 680 1633</div>
     </div>
 
-  </div>
 </body>
 </html>
