@@ -72,7 +72,7 @@
     }
 
     .company-tagline {
-      font-size: 10px;
+      font-size: 8px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: #4a7c8a;
@@ -354,7 +354,7 @@
        FOOTER
        ========================= */
 
-    .footer {
+    /* .footer {
       margin-top: 24px;
       padding-top: 12px;
       border-top: 1px solid #cde3ee;
@@ -362,7 +362,20 @@
       color: #456774;
       text-align: center;
       line-height: 1.5;
-    }
+    } */
+
+  .footer {
+    position: fixed;
+    bottom: 6mm;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-top: 1px solid #cde3ee;
+    padding-top: 6px;
+    font-size: 9.5px;
+    text-align: center;
+    background: #ffffff;
+  }
 
     .footer-company {
       font-weight: 700;
@@ -470,45 +483,72 @@
        PRINT / PDF (FIX PAGINACIÓN)
        ========================= */
     @page {
-      margin: 10mm;
-      size: A4;
+    margin: 12mm 10mm 22mm 10mm; /* ⬅️ más espacio abajo */
+    size: A4;
     }
 
     @media print {
-      body {
-        background: #ffffff !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
 
-      .page {
-        max-width: 100% !important;
-        margin: 0 !important;
-        -webkit-box-decoration-break: clone;
-        box-decoration-break: clone;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        border-top: 8px solid #00a5c9;
-      }
+  /* Reservar espacio para footer */
+  @page {
+    size: A4;
+    margin: 12mm 10mm 22mm 10mm; /* ⬅️ espacio inferior */
+  }
 
-      .page {
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-      }
+  .page {
+    max-width: 100% !important;
+    margin: 0 !important;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-top: 8px solid #00a5c9;
+    padding-bottom: 40mm !important; /* ⬅️ evita que el footer tape contenido */
+  }
 
-      .section, .conditions-table, .signatures, .photo-grid {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        -webkit-column-break-inside: avoid;
-      }
+  .page {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
 
-      .conditions-table tr {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
+  .section,
+  .conditions-table,
+  .signatures,
+  .photo-grid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+  }
 
-      thead { display: table-header-group; }
-    }
+  .conditions-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  /* FOOTER FIJO EN TODAS LAS PÁGINAS */
+  .footer {
+    position: fixed;
+    bottom: 6mm;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #cde3ee;
+    padding-top: 6px;
+    font-size: 9.5px;
+    text-align: center;
+  }
+}
+
   </style>
 </head>
 
