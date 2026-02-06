@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formato de Mantenimiento Acondicionando S.A.S</title>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #e5f1f6;
+      font-family: "Carlito", sans-serif;
+      color: #12323f;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 26px 20px 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      border-top: 8px solid #00a5c9;
+    }
+
+    /* =========================
+       HEADER 
+       ========================= */
+
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex: 2;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img {
+      max-height: 110px;
+      max-width: 320px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .company {
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .company-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #007693;
+    }
+
+    .company-tagline {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #4a7c8a;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      align-items: flex-end;
+    }
+
+    .meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid #cde3ee;
+      background: linear-gradient(180deg, #ffffff, #f6fcff);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+      min-width: 260px;
+    }
+
+    .meta-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #9fd6e4;
+      background: linear-gradient(90deg, #00a5c9, #00c4e3);
+      color: #ffffff;
+      flex-shrink: 0;
+      font-weight: 900;
+      box-shadow: 0 10px 18px rgba(0, 165, 201, 0.22);
+    }
+
+    .meta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: left;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .meta-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #4a7c8a;
+    }
+
+    .meta-value {
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #12323f;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,165,201,0), rgba(0,165,201,0.35), rgba(0,165,201,0));
+      margin: 14px 0 8px;
+    }
+
+    /* =========================
+       CHIPS
+       ========================= */
+
+    .chip-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 12px 0 20px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #9ad7e5;
+      background: #f4fcff;
+      color: #24606f;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip span.check {
+      min-width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #007693;
+      background: #ffffff;
+      border: 1px solid #cde3ee;
+      padding: 0 4px;
+    }
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
+    .section {
+      border-radius: 8px;
+      border: 1px solid #c5e0ec;
+      margin-bottom: 12px;
+      overflow: visible;
+    }
+
+    .section-header {
+      background: linear-gradient(90deg, #00a5c9, #00c4e3);
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .section-body {
+      padding: 10px 12px 12px;
+      font-size: 12px;
+    }
+
+    .fields-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .field {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #4a7c8a;
+      margin-bottom: 1px;
+    }
+
+    .field-value {
+      border-bottom: 1px solid #cde3ee;
+      min-height: 18px;
+      padding: 1px 4px 3px;
+      border-radius: 3px;
+      background: #f7fcff;
+      color: #12323f;
+      display: flex;
+      align-items: center;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .subsection-title {
+      font-weight: 700;
+      font-size: 11px;
+      color: #007693;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .multiline {
+      border-radius: 6px;
+      border: 1px solid #cde3ee;
+      background: #f7fcff;
+      padding: 6px 8px;
+      min-height: 60px;
+      white-space: pre-wrap;
+      font-size: 12px;
+    }
+
+    .conditions-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .conditions-table th,
+    .conditions-table td {
+      padding: 4px 6px;
+      border-bottom: 1px solid #e0edf3;
+    }
+
+    .conditions-table th {
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 10px;
+      color: #4a7c8a;
+    }
+
+    .conditions-table .value-cell {
+      border-bottom: 1px solid #cde3ee;
+      background: #f7fcff;
+      border-radius: 3px;
+      min-height: 18px;
+    }
+
+    .conditions-table .value-inner {
+      padding: 2px 4px 3px;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 6mm;
+      text-align: center;
+      background: #ffffff;
+      padding-top: 6px;
+      font-size: 9.5px;
+    }
+
+    .footer .header-divider{
+      margin: 0 0 6px !important;
+    }
+
+    .footer-company {
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #007693;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .footer-address { margin-bottom: 2px; }
+    .footer-contact { font-size: 9.5px; }
+
+    /* =========================
+   SIGNATURES – AUTO (3 o 4)
+   ========================= */
+
+.signatures {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 11px;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* 4 firmas */
+.signatures.s4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 3 firmas */
+.signatures.s3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.signature-box {
+  min-width: 0;
+}
+
+.signature-area {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-image {
+  max-height: 40px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.signature-line {
+  width: 100%;
+  border-top: 1px solid #cde3ee;
+  margin: 4px auto 6px;
+}
+
+.signature-name {
+  font-weight: 600;
+  color: #12323f;
+  margin-bottom: 2px;
+}
+
+.signature-role {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #4a7c8a;
+}
+
+
+    /* =========================
+       PHOTOS (UNIFORME)
+       ========================= */
+
+    .photo-item {
+      width: 100%;
+      height: 160px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #cde3ee;
+      background: #f7fcff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* =========================
+       EVIDENCE TABLE (HEADER REPETIBLE)
+       ========================= */
+
+    .section.evidence{
+      border: none !important;
+      border-radius: 0 !important;
+      overflow: visible !important;
+      margin-bottom: 12px;
+    }
+
+    .evidence-table{
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 0;
+
+      border: 1px solid #c5e0ec;
+      border-radius: 8px;
+      overflow: hidden;
+
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+
+    .evidence-table thead th{
+      background: linear-gradient(90deg, #00a5c9, #00c4e3);
+      color: #ffffff;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: left;
+    }
+
+    .evidence-table tbody td{
+      padding: 4px;
+      vertical-align: top;
+    }
+    .evidence-table tbody tr:first-child td{ padding-top: 10px; }
+    .evidence-table tbody tr:last-child  td{ padding-bottom: 12px; }
+    .evidence-table tbody td:first-child{ padding-left: 12px; }
+    .evidence-table tbody td:last-child { padding-right: 12px; }
+
+    .evidence-table tr,
+    .evidence-table td{
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .photo-empty{
+      border: 1px dashed #cde3ee;
+      background: #fbfdff;
+    }
+
+    @media print{
+      .evidence-table thead{ display: table-header-group; }
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 700px) {
+      .doc-header { flex-direction: column; align-items: flex-start; }
+      .meta-row { align-items: flex-start; width: 100%; }
+      .meta-pill { min-width: 100%; }
+      .two-columns { grid-template-columns: 1fr; }
+      .signatures { grid-template-columns: 1fr; }
+    }
+
+    /* =========================
+       PRINT / PDF
+       ========================= */
+
+    .page-break{
+      break-before: page;
+      page-break-before: always;
+    }
+
+    :root{
+      --footer-h: 15mm;
+    }
+
+    @page{
+      size: A4;
+      margin: 5mm;
+    }
+
+    @media print {
+      body{
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .page{
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .page{
+        padding-bottom: calc(var(--footer-h) + 5mm) !important;
+      }
+
+      .section:not(.evidence),
+      .conditions-table{
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      thead{ display: table-header-group; }
+
+      .signatures{
+        break-before: avoid-page !important;
+        page-break-before: avoid !important;
+      }
+
+      .footer{
+        position: fixed;
+        left: 5mm !important;
+        right: 5mm !important;
+        bottom: 5mm !important;
+        background: #ffffff;
+        border-top: none !important;
+        padding-top: 6px;
+      }
+
+      .footer .header-divider{
+        margin: 0 0 6px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- ENCABEZADO -->
+    <div class="doc-header">
+      <div class="logo-area">
+        <div class="logo-wrap">
+          <img class="logo-img" src="https://pub-8fcfa35b99dd47199ba96853b51e3d66.r2.dev/data/logo%20acondicionando.png" alt="Logo" />
+        </div>
+        <div class="company">
+          <div class="company-name">ACONDICIONANDO S.A.S</div>
+          <div class="company-tagline">Aire Acondicionado - Ventilación - Construcción</div>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-pill">
+          <div class="meta-icon">#</div>
+          <div class="meta-text">
+            <div class="meta-label">Consecutivo</div>
+            <div class="meta-value">MTTO-AIRE-020</div>
+          </div>
+        </div>
+
+        <div class="meta-pill">
+          <div class="meta-icon">📅</div>
+          <div class="meta-text">
+            <div class="meta-label">Fecha</div>
+            <div class="meta-value">2026-02-06</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-divider"></div>
+
+    <!-- TIPO DE SERVICIO -->
+    <div class="chip-row">
+      <div class="chips">
+        <div class="chip"><span class="check">✓</span><span>Mantenimiento</span></div>
+        <div class="chip"><span class="check"></span><span>Llamada por servicio</span></div>
+        <div class="chip"><span class="check"></span><span>Reparación</span></div>
+        <div class="chip"><span class="check"></span><span>Instalación</span></div>
+      </div>
+    </div>
+
+    <!-- DATOS DEL CLIENTE -->
+    <div class="section">
+      <div class="section-header">Datos del cliente</div>
+      <div class="section-body">
+        <div class="fields-row">
+          <div class="field"><div class="field-label">Cliente</div><div class="field-value">Evedisa</div></div>
+          <div class="field"><div class="field-label">Sucursal</div><div class="field-value">Unica-principal</div></div>
+        </div>
+        <div class="fields-row">
+          <div class="field">
+            <div class="field-label">Ubicación física del equipo</div>
+            <div class="field-value">RACK PISO 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESCRIPCIÓN DE LOS EQUIPOS -->
+    <div class="section">
+      <div class="section-header">Descripción de los equipos</div>
+      <div class="section-body">
+        <div class="fields-row">
+          <div class="field"><div class="field-label">Tipo de equipo</div><div class="field-value">M.S.</div></div>
+          <div class="field"><div class="field-label">Marca</div><div class="field-value">LG ELECTRONICS</div></div>
+          <div class="field"><div class="field-label">Capacidad</div><div class="field-value">2</div></div>
+        </div>
+        <div class="fields-row">
+          <div class="field"><div class="field-label">Modelo</div><div class="field-value">VM242CE NC2</div></div>
+          <div class="field"><div class="field-label">Serial</div><div class="field-value">BSN0242C4W</div></div>
+          <div class="field"><div class="field-label">Placa / # de activo</div><div class="field-value">BSN0242C4W</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFORMACIÓN SOBRE EL SERVICIO -->
+    <div class="section">
+      <div class="section-header">Información sobre el servicio</div>
+      <div class="section-body">
+        <div class="fields-row">
+          <div class="field">
+            <div class="field-label">Descripción del servicio realizado</div>
+            <div class="multiline">Se realiza mantenimiento preventivo lavado de serpentines lavado de filtros guarda polvos lavado de bandeja de drenaje y bomba de condensado lavado de blower limpieza general de carcazas y se realiza revisión de la parte eléctrica y mecánica equipo queda funcionando correctamente</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- CONDICIONES DE OPERACIÓN -->
+<div class="section">
+  <div class="section-header">Condiciones de operación</div>
+  <div class="section-body">
+    <table class="conditions-table">
+      <tr>
+        <th colspan="2">Parámetros generales</th>
+        <th colspan="2">Lecturas eléctricas y térmicas</th>
+      </tr>
+
+      <!-- Voltaje -->
+      <tr>
+        <td>Voltaje</td>
+        <td class="value-cell">
+          <div class="value-inner">220V</div>
+        </td>
+        <td>Amperaje de la Condensadora</td>
+        <td class="value-cell">
+          <div class="value-inner">8.4A</div>
+        </td>
+      </tr>
+
+      <!-- Amperaje de placa -->
+      <tr>
+        <td>Amperaje de placa</td>
+        <td class="value-cell">
+          <div class="value-inner">9.10A</div>
+        </td>
+        <td>Temperatura de suministro</td>
+        <td class="value-cell">
+          <div class="value-inner">6.5c</div>
+        </td>
+      </tr>
+
+      <!-- Presiones -->
+      <tr>
+        <td>Presión de succión</td>
+        <td class="value-cell">
+          <div class="value-inner">N/A</div>
+        </td>
+        <td>Presión de alta</td>
+        <td class="value-cell">
+          <div class="value-inner">N/A</div>
+        </td>
+      </tr>
+
+      <!-- Tecnología y refrigerante -->
+      <tr>
+        <td>Tecnología</td>
+        <td class="value-cell">
+          <div class="value-inner">inverter</div>
+        </td>
+        <td>Refrigerante</td>
+        <td class="value-cell">
+          <div class="value-inner">R - 410</div>
+        </td>
+      </tr>
+
+      <!-- Amperaje ventilador -->
+      <tr>
+        <td>Amperaje del motor de ventilador</td>
+        <td class="value-cell">
+          <div class="value-inner">N/A</div>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+ <!-- EVIDENCIA FOTOGRÁFICA (todas en una sola tabla; se parte automáticamente en páginas) -->
+
+
+  
+        <div class="section evidence" style="margin-top:24px;">
+          <table class="evidence-table">
+            <thead>
+              <tr><th colspan="3">Evidencia fotográfica</th></tr>
+            </thead>
+            <tbody>
+              
+            <tr>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdmcyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2002ca6dff797ff3142d9f9f3439e1198bf4a9f3/File.jpg" alt="Evidencia 1" /></div>
+                </td>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdmsyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--40ec1dea994408626c2c7fa91dab4b2decdd2437/File.jpg" alt="Evidencia 2" /></div>
+                </td>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdm8yIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7df1efefce2bb223cfd20c3984c3afd9508767c8/File.jpg" alt="Evidencia 3" /></div>
+                </td>
+              
+            </tr>
+          
+            <tr>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdnMyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--458d73cae0f34336ad9dd2bc3c2eb8554fa9d5d9/File.jpg" alt="Evidencia 4" /></div>
+                </td>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdncyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--fbd234bbd6503f54a9eb9d477179989cc78d20a1/File.jpg" alt="Evidencia 5" /></div>
+                </td>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdjAyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b8b6430bb307ecaeea9dceede841cdd78c37376/File.jpg" alt="Evidencia 6" /></div>
+                </td>
+              
+            </tr>
+          
+            <tr>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdjQyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f19930b24529bbb9efbc50d3732890bb222d69f0/File.jpg" alt="Evidencia 7" /></div>
+                </td>
+              
+                <td>
+                  <div class="photo-item"><img src="https://chatio.lat/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdjgyIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--62f996c64d1c1d7e0d5c440e3918b6eb59a643ac/File.jpg" alt="Evidencia 8" /></div>
+                </td>
+              
+                <td>
+                  <div class="photo-item photo-empty"></div>
+                </td>
+              
+            </tr>
+          
+            </tbody>
+          </table>
+        </div>
+      
+  
+
+    <!-- FIRMAS (NO PARTIR) -->
+<div class="signatures s4">
+
+  <!-- FIRMA CLIENTE -->
+  <div class="signature-box">
+    <div class="signature-area">
+      
+    </div>
+    <div class="signature-line"></div>
+    <div class="signature-name">Héctor Pérez</div>
+    <div class="signature-role">Firma cliente</div>
+  </div>
+
+  <!-- FIRMA TÉCNICO 1 -->
+  <div class="signature-box">
+    <div class="signature-area">
+      
+    </div>
+    <div class="signature-line"></div>
+    <div class="signature-name">Daniel Acevedo Bermudez</div>
+    <div class="signature-role">Firma técnico 1</div>
+  </div>
+
+  <!-- FIRMA TÉCNICO 2 (CONDICIONAL) -->
+  
+        <div class="signature-box">
+          <div class="signature-area">
+            
+          </div>
+          <div class="signature-line"></div>
+          <div class="signature-name">Wilber Alejandro Mosquera</div>
+          <div class="signature-role">Firma técnico 2</div>
+        </div>
+      
+
+  <!-- FIRMA GERENCIA -->
+  <div class="signature-box">
+    <div class="signature-area">
+      <img class="signature-image" src="https://i.fonts2u.com/lu/luciana_4.png" alt="Firma gerencia técnica" />
+    </div>
+    <div class="signature-line"></div>
+    <div class="signature-name">Luciana Mosquera Ayala</div>
+    <div class="signature-role">Firma gerencia técnica</div>
+  </div>
+
+</div>
+
+
+  <!-- FOOTER FUERA DE .page (se repite bien en cada página) -->
+  <div class="footer">
+    <div class="header-divider"></div>
+    <div class="footer-company">Creamos experiencias memorables</div>
+    <div class="footer-address">Parque Industrial Manzana 11 Casa 12 · Sector D · Pereira</div>
+    <div class="footer-contact">Correo: acondicionandosas@gmail.com · Tel: 316 610 9591 – 317 680 1633</div>
+  </div>
+
+</body>
+</html>
